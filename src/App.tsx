@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Languages, DollarSign } from 'lucide-react'
+import { Languages, DollarSign, Receipt, Wallet, Percent, Globe } from 'lucide-react'
 import { Button } from './components/ui/button'
 import {
   DropdownMenu,
@@ -43,7 +43,7 @@ function App() {
   ]
 
   return (
-    <div className="min-h-screen bg-slate-50">
+    <div className="flex flex-col min-h-screen bg-slate-50">
       {/* Sticky Header */}
       <header className="sticky top-0 z-50 backdrop-blur-sm bg-white/95 border-b border-slate-200">
         <div className="container mx-auto px-4 h-14 flex items-center justify-end">
@@ -51,8 +51,7 @@ function App() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="gap-2 text-slate-900 border-slate-300 hover:bg-slate-50 hover:text-slate-900">
-                <Languages className="h-4 w-4" />
-                <span className="hidden sm:inline">{language}</span>
+                <Globe className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
@@ -71,7 +70,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-6 py-4 min-h-[calc(100vh-3.5rem)] flex items-center justify-center">
+      <main className="container mx-auto px-2 py-4 flex flex-1 items-center justify-center">
         <div className="w-full max-w-sm">
           <Card className="shadow-lg border-slate-200 bg-white">
             <CardHeader className="text-center pb-6">
@@ -104,35 +103,34 @@ function App() {
 
               {/* Results */}
               <div className="space-y-4 pt-4 border-t border-slate-100">
-                <h3 className="font-semibold text-slate-800 mb-3">Results</h3>
                 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
-                      <DollarSign className="h-4 w-4 text-red-600" />
+                      <Receipt className="h-4 w-4 text-slate-700" />
                       <span className="text-sm font-medium text-slate-700">Estimated Income Tax</span>
                     </div>
-                    <span className="font-bold text-red-600">
+                    <span className="text-rose-700">
                       ${estimatedTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
-                      <DollarSign className="h-4 w-4 text-green-600" />
+                      <Wallet className="h-4 w-4 text-slate-700" />
                       <span className="text-sm font-medium text-slate-700">After-Tax Income</span>
                     </div>
-                    <span className="font-bold text-green-600">
+                    <span className="font-medium text-emerald-700">
                       ${afterTaxIncome.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
-                      <DollarSign className="h-4 w-4 text-blue-600" />
+                      <Percent className="h-4 w-4 text-slate-700" />
                       <span className="text-sm font-medium text-slate-700">Avg Tax Rate (%)</span>
                     </div>
-                    <span className="font-bold text-blue-600">
+                    <span className="font-medium text-slate-700">
                       {avgTaxRate.toFixed(1)}%
                     </span>
                   </div>
