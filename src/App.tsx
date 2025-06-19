@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Languages, DollarSign, Receipt, Wallet, Percent, Globe } from 'lucide-react'
+import { Languages, DollarSign, Receipt, Wallet, Percent } from 'lucide-react'
 import { Button } from './components/ui/button'
 import {
   DropdownMenu,
@@ -10,10 +10,12 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'
 import { Input } from './components/ui/input'
 import { Label } from './components/ui/label'
+import { useTheme } from './contexts/ThemeContext'
 
 function App() {
   const [income, setIncome] = useState<string>('')
   const [language, setLanguage] = useState<string>('English')
+  const { toggleTheme, getThemeIcon } = useTheme()
 
   // 簡單的稅務計算 (暫時的示例邏輯)
   const calculateTax = (income: number) => {
@@ -43,15 +45,25 @@ function App() {
   ]
 
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50">
+    <div className="flex flex-col min-h-screen bg-background">
       {/* Sticky Header */}
-      <header className="sticky top-0 z-50 backdrop-blur-sm bg-white/95 border-b border-slate-200">
-        <div className="container mx-auto px-4 h-14 flex items-center justify-end">
+      <header className="sticky top-0 z-50 backdrop-blur-sm bg-background/95 border-b border-border">
+        <div className="container mx-auto px-4 h-14 flex items-center justify-end gap-2">
+          {/* Theme Toggle */}
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={toggleTheme}
+            className="gap-2"
+          >
+            {getThemeIcon()}
+          </Button>
+
           {/* Language Switcher */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-2 text-slate-900 border-slate-300 hover:bg-slate-50 hover:text-slate-900">
-                <Globe className="h-4 w-4" />
+              <Button variant="outline" size="sm" className="gap-2">
+                <Languages className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">
@@ -72,12 +84,12 @@ function App() {
       {/* Main Content */}
       <main className="container mx-auto px-2 py-4 flex flex-1 items-center justify-center">
         <div className="w-full max-w-sm">
-          <Card className="shadow-lg border-slate-200 bg-white">
+          <Card className="shadow-lg">
             <CardHeader className="text-center pb-6">
-              <CardTitle className="text-xl font-bold text-slate-800">
+              <CardTitle className="text-xl font-bold">
                 Income Tax Calculator
               </CardTitle>
-              <p className="text-slate-600 text-sm mt-2">
+              <p className="text-muted-foreground text-sm mt-2">
                 Estimate your income tax and take-home pay
               </p>
             </CardHeader>
@@ -85,52 +97,52 @@ function App() {
             <CardContent className="space-y-6">
               {/* Annual Income Input */}
               <div className="space-y-2">
-                <Label htmlFor="income" className="text-sm font-medium text-slate-700">
+                <Label htmlFor="income" className="text-sm font-medium">
                   Annual Income
                 </Label>
                 <div className="relative">
-                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-slate-400" />
+                  <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="income"
                     type="number"
                     placeholder="e.g. 80000"
                     value={income}
                     onChange={(e) => setIncome(e.target.value)}
-                    className="pl-10 bg-white border-slate-300 focus:border-slate-400 focus:ring-slate-200"
+                    className="pl-10"
                   />
                 </div>
               </div>
 
               {/* Results */}
-              <div className="space-y-4 pt-4 border-t border-slate-100">
+              <div className="space-y-4 pt-4 border-t border-border">
                 
                 <div className="space-y-2">
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
-                      <Receipt className="h-4 w-4 text-slate-700" />
-                      <span className="text-sm font-medium text-slate-700">Estimated Income Tax</span>
+                      <Receipt className="h-4 w-4 text-foreground" />
+                      <span className="text-sm font-medium">Estimated Income Tax</span>
                     </div>
-                    <span className="text-rose-700">
+                    <span className="text-destructive">
                       ${estimatedTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
-                      <Wallet className="h-4 w-4 text-slate-700" />
-                      <span className="text-sm font-medium text-slate-700">After-Tax Income</span>
+                      <Wallet className="h-4 w-4 text-foreground" />
+                      <span className="text-sm font-medium">After-Tax Income</span>
                     </div>
-                    <span className="font-medium text-emerald-700">
+                    <span className="font-medium text-green-600 dark:text-green-400">
                       ${afterTaxIncome.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </div>
 
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
-                      <Percent className="h-4 w-4 text-slate-700" />
-                      <span className="text-sm font-medium text-slate-700">Avg Tax Rate (%)</span>
+                      <Percent className="h-4 w-4 text-foreground" />
+                      <span className="text-sm font-medium">Avg Tax Rate (%)</span>
                     </div>
-                    <span className="font-medium text-slate-700">
+                    <span className="font-medium">
                       {avgTaxRate.toFixed(1)}%
                     </span>
                   </div>

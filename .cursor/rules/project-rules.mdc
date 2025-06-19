@@ -11,4 +11,4 @@ description: describe the tech stack, purpose of the project
 - Tech stack: React, Vite, tailwind, shadcn/ui, TypeScript
 - Purpose: build a sg tax calculator to be the best tool in Singapore
 - Styling: fancy and niche UI with micro-interaction, SEO, i18n
-
+- Do not run `npm run dev` to verify. you may ask me to check
