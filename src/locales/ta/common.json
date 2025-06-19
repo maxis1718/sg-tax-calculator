@@ -1,0 +1,15 @@
+{
+  "title": "வருமான வரி கணக்கீட்டாளர்",
+  "subtitle": "உங்கள் வருமான வரி மற்றும் வரிக்கு பிந்தைய வருமானத்தை மதிப்பிடுங்கள்",
+  "annualIncome": "ஆண்டு வருமானம்",
+  "annualIncomePlaceholder": "எ.கா. 80000",
+  "estimatedIncomeTax": "மதிப்பிடப்பட்ட வருமான வரி",
+  "afterTaxIncome": "வரிக்கு பிந்தைய வருமானம்",
+  "avgTaxRate": "சராசரி வரி விகிதம் (%)",
+  "languages": {
+    "english": "English",
+    "chinese": "简体中文",
+    "malay": "Bahasa Melayu",
+    "tamil": "தமிழ்"
+  }
+} 

@@ -11,11 +11,12 @@ import { Card, CardContent, CardHeader, CardTitle } from './components/ui/card'
 import { Input } from './components/ui/input'
 import { Label } from './components/ui/label'
 import { useTheme } from './contexts/ThemeContext'
+import { useLanguage, type Language } from './contexts/LanguageContext'
 
 function App() {
   const [income, setIncome] = useState<string>('')
-  const [language, setLanguage] = useState<string>('English')
   const { toggleTheme, getThemeIcon } = useTheme()
+  const { language, changeLanguage, t } = useLanguage()
 
   // 簡單的稅務計算 (暫時的示例邏輯)
   const calculateTax = (income: number) => {
@@ -37,11 +38,11 @@ function App() {
   const afterTaxIncome = annualIncome - estimatedTax
   const avgTaxRate = annualIncome > 0 ? (estimatedTax / annualIncome) * 100 : 0
 
-  const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'zh', name: '简体中文' },
-    { code: 'ms', name: 'Bahasa Melayu' },
-    { code: 'ta', name: 'தமிழ்' },
+  const languages: { code: Language; name: string }[] = [
+    { code: 'en', name: t('languages.english') },
+    { code: 'zh-CN', name: t('languages.chinese') },
+    { code: 'ms', name: t('languages.malay') },
+    { code: 'ta', name: t('languages.tamil') },
   ]
 
   return (
@@ -70,8 +71,10 @@ function App() {
               {languages.map((lang) => (
                 <DropdownMenuItem
                   key={lang.code}
-                  onClick={() => setLanguage(lang.name)}
-                  className="cursor-pointer"
+                  onClick={() => changeLanguage(lang.code)}
+                  className={`cursor-pointer ${
+                    language === lang.code ? 'bg-accent' : ''
+                  }`}
                 >
                   {lang.name}
                 </DropdownMenuItem>
@@ -85,12 +88,12 @@ function App() {
       <main className="container mx-auto px-2 py-4 flex flex-1 items-center justify-center">
         <div className="w-full max-w-sm">
           <Card className="shadow-lg">
-            <CardHeader className="text-center pb-6">
-              <CardTitle className="text-xl font-bold">
-                Income Tax Calculator
+            <CardHeader className="text-center pb-4">
+              <CardTitle className="text-xl font-semibold">
+                {t('title')}
               </CardTitle>
               <p className="text-muted-foreground text-sm mt-2">
-                Estimate your income tax and take-home pay
+                {t('subtitle')}
               </p>
             </CardHeader>
             
@@ -98,14 +101,14 @@ function App() {
               {/* Annual Income Input */}
               <div className="space-y-2">
                 <Label htmlFor="income" className="text-sm font-medium">
-                  Annual Income
+                  {t('annualIncome')}
                 </Label>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="income"
                     type="number"
-                    placeholder="e.g. 80000"
+                    placeholder={t('annualIncomePlaceholder')}
                     value={income}
                     onChange={(e) => setIncome(e.target.value)}
                     className="pl-10"
@@ -120,7 +123,7 @@ function App() {
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
                       <Receipt className="h-4 w-4 text-foreground" />
-                      <span className="text-sm font-medium">Estimated Income Tax</span>
+                      <span className="text-sm font-medium">{t('estimatedIncomeTax')}</span>
                     </div>
                     <span className="text-destructive">
                       ${estimatedTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
@@ -130,7 +133,7 @@ function App() {
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
                       <Wallet className="h-4 w-4 text-foreground" />
-                      <span className="text-sm font-medium">After-Tax Income</span>
+                      <span className="text-sm font-medium">{t('afterTaxIncome')}</span>
                     </div>
                     <span className="font-medium text-green-600 dark:text-green-400">
                       ${afterTaxIncome.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
@@ -140,7 +143,7 @@ function App() {
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
                       <Percent className="h-4 w-4 text-foreground" />
-                      <span className="text-sm font-medium">Avg Tax Rate (%)</span>
+                      <span className="text-sm font-medium">{t('avgTaxRate')}</span>
                     </div>
                     <span className="font-medium">
                       {avgTaxRate.toFixed(1)}%

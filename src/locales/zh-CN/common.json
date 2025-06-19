@@ -1,0 +1,15 @@
+{
+  "title": "所得稅計算器",
+  "subtitle": "估算您的所得稅和稅後收入",
+  "annualIncome": "年收入",
+  "annualIncomePlaceholder": "例如：80000",
+  "estimatedIncomeTax": "預計所得稅",
+  "afterTaxIncome": "稅後收入",
+  "avgTaxRate": "平均稅率 (%)",
+  "languages": {
+    "english": "English",
+    "chinese": "简体中文",
+    "malay": "Bahasa Melayu",
+    "tamil": "தமிழ்"
+  }
+} 
