@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Languages, DollarSign, Receipt, Wallet, Percent, PiggyBank, Building2, Plus } from 'lucide-react'
 import { Button } from './components/ui/button'
 import {
@@ -12,15 +12,31 @@ import { Input } from './components/ui/input'
 import { Label } from './components/ui/label'
 import { useTheme } from './contexts/ThemeContext'
 import { useLanguage, type Language } from './contexts/LanguageContext'
+import { useURLParam } from './contexts/URLParamContext'
 import { getComprehensiveSummary } from './lib/taxCalculator'
 
 function App() {
   const [income, setIncome] = useState<string>('')
   const { toggleTheme, getThemeIcon } = useTheme()
   const { language, changeLanguage, t } = useLanguage()
+  const { income: urlIncome, setIncome: setUrlIncome } = useURLParam()
+
+  // 初始化時從 URL 參數設置輸入框值
+  useEffect(() => {
+    if (urlIncome) {
+      setIncome(urlIncome.toString())
+    }
+  }, [urlIncome])
 
   const annualIncome = parseFloat(income) || 0
   const summary = getComprehensiveSummary(annualIncome)
+
+  // 處理輸入變化並同步到 URL
+  const handleIncomeChange = (value: string) => {
+    setIncome(value)
+    const numericValue = parseFloat(value) || null
+    setUrlIncome(numericValue)
+  }
 
   const languages: { code: Language; name: string }[] = [
     { code: 'en', name: t('languages.english') },
@@ -94,7 +110,7 @@ function App() {
                     type="number"
                     placeholder={t('annualIncomePlaceholder')}
                     value={income}
-                    onChange={(e) => setIncome(e.target.value)}
+                    onChange={(e) => handleIncomeChange(e.target.value)}
                     className="pl-10"
                   />
                 </div>

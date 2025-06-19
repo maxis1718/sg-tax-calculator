@@ -1,5 +1,5 @@
 {
-  "title": "Income Tax Calculator",
+  "title": "Singapore Income Tax Calculator",
   "subtitle": "Estimate your income tax and take-home pay",
   "annualIncome": "Annual Income",
   "annualIncomePlaceholder": "e.g. 80000",
@@ -11,6 +11,8 @@
   "employerCPF": "Employer CPF (17%)",
   "totalCPF": "Total CPF",
   "finalTakeHome": "Final Take-Home",
+  "seoDescription": "Calculate your Singapore income tax and CPF contributions instantly. Free, accurate tax calculator supporting multiple languages for Singapore residents.",
+  "seoTitleSuffix": "Tax Calculator",
   "languages": {
     "english": "English",
     "chinese": "简体中文",

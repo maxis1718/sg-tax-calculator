@@ -5,13 +5,18 @@ import './lib/i18n'
 import App from './App.tsx'
 import { ThemeProvider } from './contexts/ThemeContext'
 import { LanguageProvider } from './contexts/LanguageContext'
+import { URLParamProvider } from './contexts/URLParamContext'
+import { SEOHead } from './components/SEOHead'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
+    <URLParamProvider>
       <LanguageProvider>
-        <App />
+        <SEOHead />
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
       </LanguageProvider>
-    </ThemeProvider>
+    </URLParamProvider>
   </StrictMode>,
 )
