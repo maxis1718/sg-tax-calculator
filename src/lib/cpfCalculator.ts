@@ -58,13 +58,13 @@ export function calculateCPF(annualIncome: number): CPFResult {
 
   // 估算月薪 (假設80%是固定月薪，20%是獎金)
   const estimatedMonthlySalary = (annualIncome * 0.8) / 12;
-  const estimatedBonus = annualIncome * 0.2;
+  // const estimatedBonus = annualIncome * 0.2;
 
   // 判斷計算方式
   if (estimatedMonthlySalary <= CPF_CONSTANTS.OW_MONTHLY_CEILING) {
     return calculateSimpleCPF(annualIncome);
   } else {
-    return calculateCeilingCPF(annualIncome, estimatedMonthlySalary, estimatedBonus);
+    return calculateCeilingCPF(annualIncome, estimatedMonthlySalary);
   }
 }
 
@@ -101,8 +101,7 @@ function calculateSimpleCPF(annualIncome: number): CPFResult {
  */
 function calculateCeilingCPF(
   annualIncome: number, 
-  estimatedMonthlySalary: number, 
-  estimatedBonus: number
+  estimatedMonthlySalary: number
 ): CPFResult {
   // 計算年度OW (受月度ceiling限制)
   const annualOW = Math.min(
@@ -204,14 +203,14 @@ export function getCPFSummary(annualIncome: number): CPFSummary {
  * @param options 詳細工資資訊
  * @returns 精確的CPF計算結果
  */
-export function calculateAdvancedCPF(options: AdvancedCPFOptions): CPFResult {
-  // TODO: V2 實作
-  // 支援詳細的月薪/獎金分布計算
-  // 支援年中工作變動
-  // 支援跨年齡段計算 (55歲邊界)
+// export function calculateAdvancedCPF(options: AdvancedCPFOptions): CPFResult {
+//   // TODO: V2 實作
+//   // 支援詳細的月薪/獎金分布計算
+//   // 支援年中工作變動
+//   // 支援跨年齡段計算 (55歲邊界)
   
-  throw new Error('進階CPF計算功能將在V2版本提供');
-}
+//   throw new Error('進階CPF計算功能將在V2版本提供');
+// }
 
 /**
  * 檢查是否需要使用進階計算

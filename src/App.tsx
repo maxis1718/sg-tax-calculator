@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Languages, DollarSign, Receipt, Wallet, Percent, PiggyBank, Building2, Plus } from 'lucide-react'
+import { Languages, DollarSign, Receipt, Wallet, Percent, PiggyBank, Plus } from 'lucide-react'
 import { Button } from './components/ui/button'
 import {
   DropdownMenu,

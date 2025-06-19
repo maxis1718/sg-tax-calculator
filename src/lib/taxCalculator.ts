@@ -4,7 +4,7 @@
  * 來源: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/individual-income-tax-rates
  */
 
-import { calculateCPF, getCPFSummary, type CPFResult, type CPFSummary } from './cpfCalculator';
+import { getCPFSummary, type CPFSummary } from './cpfCalculator';
 
 // 稅率階梯結構
 interface TaxBracket {
