@@ -12,31 +12,15 @@ import { Input } from './components/ui/input'
 import { Label } from './components/ui/label'
 import { useTheme } from './contexts/ThemeContext'
 import { useLanguage, type Language } from './contexts/LanguageContext'
+import { getTaxSummary } from './lib/taxCalculator'
 
 function App() {
   const [income, setIncome] = useState<string>('')
   const { toggleTheme, getThemeIcon } = useTheme()
   const { language, changeLanguage, t } = useLanguage()
 
-  // 簡單的稅務計算 (暫時的示例邏輯)
-  const calculateTax = (income: number) => {
-    if (income <= 20000) return 0
-    if (income <= 30000) return (income - 20000) * 0.02
-    if (income <= 40000) return 200 + (income - 30000) * 0.035
-    if (income <= 80000) return 550 + (income - 40000) * 0.07
-    if (income <= 120000) return 3350 + (income - 80000) * 0.115
-    if (income <= 160000) return 7950 + (income - 120000) * 0.15
-    if (income <= 200000) return 13950 + (income - 160000) * 0.18
-    if (income <= 240000) return 21150 + (income - 200000) * 0.19
-    if (income <= 280000) return 28750 + (income - 240000) * 0.195
-    if (income <= 320000) return 36550 + (income - 280000) * 0.2
-    return 44550 + (income - 320000) * 0.22
-  }
-
   const annualIncome = parseFloat(income) || 0
-  const estimatedTax = calculateTax(annualIncome)
-  const afterTaxIncome = annualIncome - estimatedTax
-  const avgTaxRate = annualIncome > 0 ? (estimatedTax / annualIncome) * 100 : 0
+  const taxSummary = getTaxSummary(annualIncome)
 
   const languages: { code: Language; name: string }[] = [
     { code: 'en', name: t('languages.english') },
@@ -125,8 +109,8 @@ function App() {
                       <Receipt className="h-4 w-4 text-foreground" />
                       <span className="text-sm font-medium">{t('estimatedIncomeTax')}</span>
                     </div>
-                    <span className="text-destructive">
-                      ${estimatedTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    <span className="font-semibold text-rose-700 dark:text-rose-400">
+                      ${taxSummary.netTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </div>
 
@@ -135,8 +119,8 @@ function App() {
                       <Wallet className="h-4 w-4 text-foreground" />
                       <span className="text-sm font-medium">{t('afterTaxIncome')}</span>
                     </div>
-                    <span className="font-medium text-green-600 dark:text-green-400">
-                      ${afterTaxIncome.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    <span className="font-semibold text-emerald-700 dark:text-emerald-400">
+                      ${taxSummary.afterTaxIncome.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </div>
 
@@ -145,8 +129,8 @@ function App() {
                       <Percent className="h-4 w-4 text-foreground" />
                       <span className="text-sm font-medium">{t('avgTaxRate')}</span>
                     </div>
-                    <span className="font-medium">
-                      {avgTaxRate.toFixed(1)}%
+                    <span className="font-semibold">
+                      {taxSummary.averageTaxRate.toFixed(1)}%
                     </span>
                   </div>
                 </div>
