@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Languages, DollarSign, Receipt, Wallet, Percent } from 'lucide-react'
+import { Languages, DollarSign, Receipt, Wallet, Percent, PiggyBank, Building2, Plus } from 'lucide-react'
 import { Button } from './components/ui/button'
 import {
   DropdownMenu,
@@ -12,7 +12,7 @@ import { Input } from './components/ui/input'
 import { Label } from './components/ui/label'
 import { useTheme } from './contexts/ThemeContext'
 import { useLanguage, type Language } from './contexts/LanguageContext'
-import { getTaxSummary } from './lib/taxCalculator'
+import { getComprehensiveSummary } from './lib/taxCalculator'
 
 function App() {
   const [income, setIncome] = useState<string>('')
@@ -20,7 +20,7 @@ function App() {
   const { language, changeLanguage, t } = useLanguage()
 
   const annualIncome = parseFloat(income) || 0
-  const taxSummary = getTaxSummary(annualIncome)
+  const summary = getComprehensiveSummary(annualIncome)
 
   const languages: { code: Language; name: string }[] = [
     { code: 'en', name: t('languages.english') },
@@ -103,6 +103,7 @@ function App() {
               {/* Results */}
               <div className="space-y-4 pt-4 border-t border-border">
                 
+                {/* Tax Section */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between py-2">
                     <div className="flex items-center space-x-2">
@@ -110,17 +111,7 @@ function App() {
                       <span className="text-sm font-medium">{t('estimatedIncomeTax')}</span>
                     </div>
                     <span className="font-semibold text-rose-700 dark:text-rose-400">
-                      ${taxSummary.netTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center justify-between py-2">
-                    <div className="flex items-center space-x-2">
-                      <Wallet className="h-4 w-4 text-foreground" />
-                      <span className="text-sm font-medium">{t('afterTaxIncome')}</span>
-                    </div>
-                    <span className="font-semibold text-emerald-700 dark:text-emerald-400">
-                      ${taxSummary.afterTaxIncome.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      ${summary.tax.netTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </div>
 
@@ -130,7 +121,54 @@ function App() {
                       <span className="text-sm font-medium">{t('avgTaxRate')}</span>
                     </div>
                     <span className="font-semibold">
-                      {taxSummary.averageTaxRate.toFixed(1)}%
+                      {summary.tax.averageTaxRate.toFixed(1)}%
+                    </span>
+                  </div>
+                </div>
+
+                {/* CPF Section */}
+                <div className="space-y-2 pt-3 border-t border-border/50">
+                  <div className="flex items-center gap-2 mb-2">
+                    <PiggyBank className="h-4 w-4 text-teal-700 dark:text-teal-400" />
+                    <span className="text-sm font-medium text-teal-700 dark:text-teal-400">
+                      {t('cpfContributions')}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between py-1.5 pl-6">
+                    <span className="text-sm text-muted-foreground">{t('employeeCPF')}</span>
+                    <span className="font-medium text-slate-600 dark:text-slate-400">
+                      ${summary.cpf.employeeContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between py-1.5 pl-6">
+                    <span className="text-sm text-muted-foreground">{t('employerCPF')}</span>
+                    <span className="font-medium text-slate-600 dark:text-slate-400">
+                      ${summary.cpf.employerContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between py-1.5 pl-6 border-t border-border/30">
+                    <div className="flex items-center space-x-2">
+                      <Plus className="h-3 w-3 text-muted-foreground" />
+                      <span className="text-sm font-medium">{t('totalCPF')}</span>
+                    </div>
+                    <span className="font-semibold text-teal-800 dark:text-teal-400">
+                      ${summary.cpf.totalCPFContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Final Take-Home */}
+                <div className="pt-2 border-t border-border">
+                  <div className="flex items-center justify-between py-2">
+                    <div className="flex items-center space-x-2">
+                      <Wallet className="h-4 w-4 text-foreground" />
+                      <span className="text-sm font-medium">{t('finalTakeHome')}</span>
+                    </div>
+                    <span className="font-semibold text-cyan-700 dark:text-cyan-400 text-lg">
+                      ${summary.finalTakeHome.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </span>
                   </div>
                 </div>

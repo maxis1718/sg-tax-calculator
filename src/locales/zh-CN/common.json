@@ -6,6 +6,11 @@
   "estimatedIncomeTax": "預計所得稅",
   "afterTaxIncome": "稅後收入",
   "avgTaxRate": "平均稅率 (%)",
+  "cpfContributions": "CPF 公積金",
+  "employeeCPF": "員工 CPF (20%)",
+  "employerCPF": "雇主 CPF (17%)",
+  "totalCPF": "總 CPF",
+  "finalTakeHome": "最終實收",
   "languages": {
     "english": "English",
     "chinese": "简体中文",

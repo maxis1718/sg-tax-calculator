@@ -4,6 +4,8 @@
  * 來源: https://www.iras.gov.sg/taxes/individual-income-tax/basics-of-individual-income-tax/tax-residency-and-tax-rates/individual-income-tax-rates
  */
 
+import { calculateCPF, getCPFSummary, type CPFResult, type CPFSummary } from './cpfCalculator';
+
 // 稅率階梯結構
 interface TaxBracket {
   min: number;
@@ -79,7 +81,7 @@ export function calculateNetTax(annualIncome: number): number {
 }
 
 /**
- * 計算稅後收入
+ * 計算稅後收入 (只考慮所得稅)
  * @param annualIncome 年收入
  * @returns 稅後收入
  */
@@ -118,7 +120,7 @@ export function calculateMarginalTaxRate(annualIncome: number): number {
 }
 
 /**
- * 獲取稅務計算摘要
+ * 獲取稅務計算摘要 (不含CPF)
  * @param annualIncome 年收入
  * @returns 稅務計算摘要
  */
@@ -148,5 +150,64 @@ export function getTaxSummary(annualIncome: number): TaxSummary {
     afterTaxIncome,
     averageTaxRate,
     marginalTaxRate
+  };
+}
+
+// ===============================================
+// 整合 TAX + CPF 計算
+// ===============================================
+
+/**
+ * 綜合財務摘要 (稅務 + CPF)
+ */
+export interface ComprehensiveSummary {
+  // 輸入
+  annualIncome: number;
+  
+  // 稅務相關
+  tax: {
+    grossTax: number;
+    rebate: number;
+    netTax: number;
+    averageTaxRate: number;
+    marginalTaxRate: number;
+  };
+  
+  // CPF 相關
+  cpf: CPFSummary;
+  
+  // 最終結果
+  finalTakeHome: number; // 扣除稅和CPF員工貢獻後的實收
+  totalDeductions: number; // 總扣除額 (稅 + CPF員工貢獻)
+  effectiveTakeHomeRate: number; // 實收比例
+}
+
+/**
+ * 獲取完整的財務摘要 (稅務 + CPF)
+ * @param annualIncome 年收入
+ * @returns 綜合財務摘要
+ */
+export function getComprehensiveSummary(annualIncome: number): ComprehensiveSummary {
+  const taxSummary = getTaxSummary(annualIncome);
+  const cpfSummary = getCPFSummary(annualIncome);
+  
+  // 計算最終實收 (扣除稅和CPF員工貢獻)
+  const finalTakeHome = annualIncome - taxSummary.netTax - cpfSummary.employeeContribution;
+  const totalDeductions = taxSummary.netTax + cpfSummary.employeeContribution;
+  const effectiveTakeHomeRate = annualIncome > 0 ? (finalTakeHome / annualIncome) * 100 : 0;
+
+  return {
+    annualIncome,
+    tax: {
+      grossTax: taxSummary.grossTax,
+      rebate: taxSummary.rebate,
+      netTax: taxSummary.netTax,
+      averageTaxRate: taxSummary.averageTaxRate,
+      marginalTaxRate: taxSummary.marginalTaxRate,
+    },
+    cpf: cpfSummary,
+    finalTakeHome: Math.round(finalTakeHome),
+    totalDeductions: Math.round(totalDeductions),
+    effectiveTakeHomeRate: Number(effectiveTakeHomeRate.toFixed(1))
   };
 } 

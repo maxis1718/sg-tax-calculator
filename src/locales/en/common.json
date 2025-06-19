@@ -6,6 +6,11 @@
   "estimatedIncomeTax": "Estimated Income Tax",
   "afterTaxIncome": "After-Tax Income",
   "avgTaxRate": "Avg Tax Rate (%)",
+  "cpfContributions": "CPF Contributions",
+  "employeeCPF": "Employee CPF (20%)",
+  "employerCPF": "Employer CPF (17%)",
+  "totalCPF": "Total CPF",
+  "finalTakeHome": "Final Take-Home",
   "languages": {
     "english": "English",
     "chinese": "简体中文",

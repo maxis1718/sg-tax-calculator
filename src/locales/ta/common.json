@@ -6,6 +6,11 @@
   "estimatedIncomeTax": "மதிப்பிடப்பட்ட வருமான வரி",
   "afterTaxIncome": "வரிக்கு பிந்தைய வருமானம்",
   "avgTaxRate": "சராசரி வரி விகிதம் (%)",
+  "cpfContributions": "CPF பங்களிப்புகள்",
+  "employeeCPF": "பணியாளர் CPF (20%)",
+  "employerCPF": "முதலாளி CPF (17%)",
+  "totalCPF": "மொத்த CPF",
+  "finalTakeHome": "இறுதி கையில் மிச்சம்",
   "languages": {
     "english": "English",
     "chinese": "简体中文",

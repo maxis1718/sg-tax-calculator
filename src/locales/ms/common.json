@@ -6,6 +6,11 @@
   "estimatedIncomeTax": "Anggaran Cukai Pendapatan",
   "afterTaxIncome": "Pendapatan Selepas Cukai",
   "avgTaxRate": "Kadar Cukai Purata (%)",
+  "cpfContributions": "Caruman CPF",
+  "employeeCPF": "CPF Pekerja (20%)",
+  "employerCPF": "CPF Majikan (17%)",
+  "totalCPF": "Jumlah CPF",
+  "finalTakeHome": "Gaji Bersih Akhir",
   "languages": {
     "english": "English",
     "chinese": "简体中文",
