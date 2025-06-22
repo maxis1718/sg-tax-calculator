@@ -37,7 +37,7 @@ function App() {
   }, [urlIncome])
 
   const annualIncome = parseFloat(income) || 0
-  const summary = getComprehensiveSummary(annualIncome)
+  const summary = getComprehensiveSummary(annualIncome, residentStatus === 'citizen')
 
   // 處理輸入變化並同步到 URL
   const handleIncomeChange = (value: string) => {
@@ -96,7 +96,7 @@ function App() {
       {/* Main Content */}
       <main className="container mx-auto px-2 flex flex-1 items-center justify-center">
         <div className="w-full max-w-sm">
-          <Card className="shadow-lg">
+          <Card className="shadow-lg transition-all duration-162 ease-out will-change-[height]">
             <CardHeader className="text-center pb-4">
               <CardTitle className="text-xl font-semibold">
                 {t('title')}
@@ -127,35 +127,35 @@ function App() {
 
               {/* Resident Status */}
               <div className="space-y-2">
-                <Label className="text-sm font-medium">Resident Status</Label>
+                <Label className="text-sm font-medium">{t('residentStatus')}</Label>
                 <div className="flex space-x-2">
                   <Toggle
                     pressed={residentStatus === 'citizen'}
                     onPressedChange={() => setResidentStatus('citizen')}
-                    className={`flex-1 border border-solid transition-all duration-100 ${
+                    className={`flex-1 border border-solid transition-all ${
                       residentStatus === 'citizen' 
                         ? 'border-border bg-accent text-accent-foreground opacity-100 scale-100' 
                         : 'border-border bg-background opacity-70 scale-95'
                     }`}
                   >
-                    Singapore Citizen/PR
+                    {t('singaporeCitizenPR')}
                   </Toggle>
                   <Toggle
                     pressed={residentStatus === 'foreigner'}
                     onPressedChange={() => setResidentStatus('foreigner')}
-                    className={`flex-1 border border-solid transition-all duration-100 ${
+                    className={`flex-1 border border-solid transition-all ${
                       residentStatus === 'foreigner' 
                         ? 'border-border bg-accent text-accent-foreground opacity-100 scale-100' 
                         : 'border-border bg-background opacity-70 scale-95'
                     }`}
                   >
-                    Foreigner
+                    {t('foreigner')}
                   </Toggle>
                 </div>
               </div>
 
               {/* Results */}
-              <div className="space-y-4 pt-4 border-t border-border">
+              <div className="space-y-4 pt-4 border-t border-border transition-all duration-100 ease-in-out overflow-hidden">
                 
                 {/* Tax Section */}
                 <div className="space-y-2">
@@ -181,40 +181,46 @@ function App() {
                 </div>
 
                 {/* CPF Section */}
-                <div className="pt-3 border-t border-border/50">
-                  <Accordion type="single" collapsible>
-                    <AccordionItem value="cpf" className="border-none group">
-                      <AccordionTrigger className="py-2 hover:no-underline [&>svg]:hidden focus-visible:outline-none">
-                        <div className="flex items-center justify-between w-full">
-                          <div className="flex items-center space-x-2">
-                            <PiggyBank className="h-4 w-4 text-teal-700 dark:text-teal-400" />
-                            <span className="text-sm font-medium text-teal-700 dark:text-teal-400">
-                              {t('cpfContributions')}
+                <div className={`grid transition-all duration-162 ease-out overflow-hidden ${
+                  residentStatus === 'citizen' 
+                    ? 'grid-rows-[1fr] opacity-100' 
+                    : 'grid-rows-[0fr] opacity-0'
+                }`}>
+                  <div className="min-h-0 pt-3 border-t border-border/50">
+                    <Accordion type="single" collapsible>
+                      <AccordionItem value="cpf" className="border-none group">
+                        <AccordionTrigger className="py-2 hover:no-underline [&>svg]:hidden focus-visible:outline-none">
+                          <div className="flex items-center justify-between w-full">
+                            <div className="flex items-center space-x-2">
+                              <PiggyBank className="h-4 w-4 text-teal-700 dark:text-teal-400" />
+                              <span className="text-sm font-medium text-teal-700 dark:text-teal-400">
+                                {t('cpfContributions')}
+                              </span>
+                              <ChevronDown className="h-4 w-4 shrink-0 text-teal-700 dark:text-teal-400 transition-transform duration-251 ease-out group-data-[state=open]:rotate-180" />
+                            </div>
+                            <span className="text-base font-semibold text-teal-800 dark:text-teal-400">
+                              ${summary.cpf.totalCPFContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                             </span>
-                            <ChevronDown className="h-4 w-4 shrink-0 transition-transform duration-200 text-teal-700 dark:text-teal-400 group-data-[state=open]:rotate-180" />
                           </div>
-                          <span className="text-base font-semibold text-teal-800 dark:text-teal-400">
-                            ${summary.cpf.totalCPFContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                          </span>
-                        </div>
-                      </AccordionTrigger>
-                      <AccordionContent className="space-y-2 pt-2 will-change-[height] transition-all duration-300 ease-out">
-                        <div className="flex items-center justify-between py-1.5 pl-6">
-                          <span className="text-sm text-muted-foreground">{t('employeeCPF')}</span>
-                          <span className="font-medium text-slate-600 dark:text-slate-400">
-                            ${summary.cpf.employeeContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                          </span>
-                        </div>
+                        </AccordionTrigger>
+                        <AccordionContent className="space-y-2 pt-2 will-change-[height] transition-all duration-162 ease-out">
+                          <div className="flex items-center justify-between py-1.5 pl-6">
+                            <span className="text-sm text-muted-foreground">{t('employeeCPF')}</span>
+                            <span className="font-medium text-slate-600 dark:text-slate-400">
+                              ${summary.cpf.employeeContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                            </span>
+                          </div>
 
-                        <div className="flex items-center justify-between py-1.5 pl-6">
-                          <span className="text-sm text-muted-foreground">{t('employerCPF')}</span>
-                          <span className="font-medium text-slate-600 dark:text-slate-400">
-                            ${summary.cpf.employerContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                          </span>
-                        </div>
-                      </AccordionContent>
-                    </AccordionItem>
-                  </Accordion>
+                          <div className="flex items-center justify-between py-1.5 pl-6">
+                            <span className="text-sm text-muted-foreground">{t('employerCPF')}</span>
+                            <span className="font-medium text-slate-600 dark:text-slate-400">
+                              ${summary.cpf.employerContribution.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                            </span>
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    </Accordion>
+                  </div>
                 </div>
 
                 {/* Final Take-Home */}

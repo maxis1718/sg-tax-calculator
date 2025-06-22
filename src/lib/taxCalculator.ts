@@ -185,11 +185,25 @@ export interface ComprehensiveSummary {
 /**
  * 獲取完整的財務摘要 (稅務 + CPF)
  * @param annualIncome 年收入
+ * @param isResident 是否為居民 (citizen/PR)，false 表示外國人
  * @returns 綜合財務摘要
  */
-export function getComprehensiveSummary(annualIncome: number): ComprehensiveSummary {
+export function getComprehensiveSummary(annualIncome: number, isResident: boolean = true): ComprehensiveSummary {
   const taxSummary = getTaxSummary(annualIncome);
-  const cpfSummary = getCPFSummary(annualIncome);
+  const cpfSummary = isResident ? getCPFSummary(annualIncome) : {
+    employeeContribution: 0,
+    employerContribution: 0,
+    totalCPFContribution: 0,
+    cpfSubjectIncome: 0,
+    exemptIncome: annualIncome,
+    calculationMethod: 'simple' as const,
+    assumptions: ['外國人不參與CPF'],
+    monthlyBreakdown: {
+      employeeContribution: 0,
+      employerContribution: 0,
+      totalContribution: 0,
+    }
+  };
   
   // 計算最終實收 (扣除稅和CPF員工貢獻)
   const finalTakeHome = annualIncome - taxSummary.netTax - cpfSummary.employeeContribution;

@@ -1,8 +1,11 @@
 {
   "title": "Singapore Income Tax Calculator",
-  "subtitle": "Estimate your income tax and take-home pay",
+  "subtitle": "Estimate your income tax and after-tax income",
   "annualIncome": "Annual Income",
-  "annualIncomePlaceholder": "e.g. 80000",
+  "annualIncomePlaceholder": "e.g., 80000",
+  "residentStatus": "Resident Status",
+  "singaporeCitizenPR": "Singapore Citizen/PR",
+  "foreigner": "Foreigner",
   "estimatedIncomeTax": "Estimated Income Tax",
   "afterTaxIncome": "After-Tax Income",
   "avgTaxRate": "Average Tax Rate (%)",
@@ -11,6 +14,6 @@
   "employerCPF": "Employer CPF (17%)",
   "totalCPF": "Total CPF",
   "finalTakeHome": "Final Take-Home",
-  "seoDescription": "Calculate your Singapore income tax and CPF contributions instantly. Free, accurate tax calculator supporting multiple languages for Singapore residents.",
+  "seoDescription": "Quickly calculate your Singapore income tax and CPF contributions. Free, accurate tax calculator with multi-language support designed for Singapore residents.",
   "seoTitleSuffix": "Tax Calculator"
 } 
