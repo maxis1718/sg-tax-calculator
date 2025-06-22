@@ -2,10 +2,25 @@ import path from "path"
 import tailwindcss from "@tailwindcss/vite"
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import Prerenderer from '@prerenderer/rollup-plugin'
+import Renderer from '@prerenderer/renderer-puppeteer'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(), 
+    tailwindcss(),
+    // 只在 build 時使用預渲染
+    ...(process.env.NODE_ENV === 'production' ? [
+      Prerenderer({
+        routes: ['/', '/zh-Hans', '/zh-Hant', '/ms', '/ta'],
+        renderer: new Renderer({
+          renderAfterTime: 3000,
+          headless: true,
+        })
+      })
+    ] : [])
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),

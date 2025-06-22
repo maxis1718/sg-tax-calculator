@@ -39,10 +39,11 @@ function App() {
   }
 
   const languages: { code: Language; name: string }[] = [
-    { code: 'en', name: t('languages.english') },
-    { code: 'zh-CN', name: t('languages.chinese') },
-    { code: 'ms', name: t('languages.malay') },
-    { code: 'ta', name: t('languages.tamil') },
+    { code: 'en', name: t('english', { ns: 'languages' }) },
+    { code: 'ms', name: t('malay', { ns: 'languages' }) },
+    { code: 'ta', name: t('tamil', { ns: 'languages' }) },
+    { code: 'zh-Hant', name: t('traditionalChinese', { ns: 'languages' }) },
+    { code: 'zh-Hans', name: t('chinese', { ns: 'languages' }) },
   ]
 
   return (
@@ -85,7 +86,7 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-2 py-4 flex flex-1 items-center justify-center">
+      <main className="container mx-auto px-2 flex flex-1 items-center justify-center">
         <div className="w-full max-w-sm">
           <Card className="shadow-lg">
             <CardHeader className="text-center pb-4">

@@ -29,7 +29,8 @@ export function SEOHead() {
   // 語言代碼映射
   const langMap: Record<string, string> = {
     'en': 'en-SG',
-    'zh-CN': 'zh-CN',
+    'zh-Hans': 'zh-CN',
+    'zh-Hant': 'zh-TW',
     'ms': 'ms-MY',
     'ta': 'ta-SG'
   }
@@ -68,7 +69,8 @@ export function SEOHead() {
       
       {/* 多語言 alternate links */}
       <link rel="alternate" hrefLang="en" href="https://sg-tax-calculator.com" />
-      <link rel="alternate" hrefLang="zh-CN" href="https://sg-tax-calculator.com/zh-CN" />
+      <link rel="alternate" hrefLang="zh-CN" href="https://sg-tax-calculator.com/zh-Hans" />
+      <link rel="alternate" hrefLang="zh-TW" href="https://sg-tax-calculator.com/zh-Hant" />
       <link rel="alternate" hrefLang="ms" href="https://sg-tax-calculator.com/ms" />
       <link rel="alternate" hrefLang="ta" href="https://sg-tax-calculator.com/ta" />
       <link rel="alternate" hrefLang="x-default" href="https://sg-tax-calculator.com" />

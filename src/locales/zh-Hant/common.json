@@ -1,0 +1,16 @@
+{
+  "title": "新加坡所得稅計算機",
+  "subtitle": "估算您的所得稅和稅後收入",
+  "annualIncome": "年收入",
+  "annualIncomePlaceholder": "例如：80000",
+  "estimatedIncomeTax": "預估所得稅",
+  "afterTaxIncome": "稅後收入",
+  "avgTaxRate": "平均稅率 (%)",
+  "cpfContributions": "CPF 公積金",
+  "employeeCPF": "員工 CPF (20%)",
+  "employerCPF": "雇主 CPF (17%)",
+  "totalCPF": "總計 CPF",
+  "finalTakeHome": "實際收入",
+  "seoDescription": "快速計算您的新加坡所得稅和公積金繳費。免費、準確的稅務計算機，支援多語言，專為新加坡居民設計。",
+  "seoTitleSuffix": "稅務計算機"
+} 

@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect } from 'react'
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 
-export type Language = 'en' | 'zh-CN' | 'ms' | 'ta'
+export type Language = 'en' | 'zh-Hans' | 'zh-Hant' | 'ms' | 'ta'
 
 interface LanguageContextType {
   language: Language
@@ -23,7 +23,21 @@ export function LanguageProvider({ children }: LanguageProviderProps) {
   const language = (i18n.language || 'en') as Language
 
   const changeLanguage = (lang: Language) => {
+    // 更新 i18n 語言
     i18n.changeLanguage(lang)
+    
+    // 更新 URL 路徑
+    const currentPath = window.location.pathname
+    const currentParams = window.location.search
+    
+    // 移除現有的語言前綴
+    const cleanPath = currentPath.replace(/^\/[a-z]{2}(?:-[A-Z][a-z]+)?/, '') || '/'
+    
+    // 構建新路徑
+    const newPath = lang === 'en' ? cleanPath : `/${lang}${cleanPath}`
+    
+    // 使用 pushState 更新 URL 但不重新加載頁面
+    window.history.pushState({}, '', newPath + currentParams)
   }
 
   // Update document language attribute for accessibility

@@ -1,8 +1,8 @@
 {
   "title": "Kalkulator Cukai Pendapatan Singapura",
-  "subtitle": "Anggaran cukai pendapatan dan gaji bersih anda",
+  "subtitle": "Anggaran cukai pendapatan dan pendapatan selepas cukai anda",
   "annualIncome": "Pendapatan Tahunan",
-  "annualIncomePlaceholder": "contoh: 80000",
+  "annualIncomePlaceholder": "cth: 80000",
   "estimatedIncomeTax": "Anggaran Cukai Pendapatan",
   "afterTaxIncome": "Pendapatan Selepas Cukai",
   "avgTaxRate": "Kadar Cukai Purata (%)",
@@ -10,13 +10,7 @@
   "employeeCPF": "CPF Pekerja (20%)",
   "employerCPF": "CPF Majikan (17%)",
   "totalCPF": "Jumlah CPF",
-  "finalTakeHome": "Gaji Bersih Akhir",
-  "seoDescription": "Kira cukai pendapatan dan caruman CPF Singapura anda dengan segera. Kalkulator cukai percuma, tepat dan menyokong pelbagai bahasa untuk penduduk Singapura.",
-  "seoTitleSuffix": "Kalkulator Cukai",
-  "languages": {
-    "english": "English",
-    "chinese": "简体中文",
-    "malay": "Bahasa Melayu",
-    "tamil": "தமிழ்"
-  }
+  "finalTakeHome": "Pendapatan Bersih Akhir",
+  "seoDescription": "Kira cukai pendapatan dan caruman CPF Singapura anda dengan serta-merta. Kalkulator cukai percuma dan tepat yang menyokong pelbagai bahasa untuk penduduk Singapura.",
+  "seoTitleSuffix": "Kalkulator Cukai"
 } 

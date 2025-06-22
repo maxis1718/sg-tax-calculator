@@ -1,1 +1,9 @@
-/*    /index.html   200 
+# Static routes (SSG)
+/           /index.html                200
+/zh-Hans    /zh-Hans/index.html        200
+/zh-Hant    /zh-Hant/index.html        200
+/ms         /ms/index.html             200
+/ta         /ta/index.html             200
+
+# SPA fallback for client-side routing
+/*          /index.html                200 
