@@ -20,9 +20,11 @@ import { useTheme } from './contexts/ThemeContext'
 import { useLanguage, type Language } from './contexts/LanguageContext'
 import { useURLParam } from './contexts/URLParamContext'
 import { getComprehensiveSummary } from './lib/taxCalculator'
+import { Toggle } from './components/ui/toggle'
 
 function App() {
   const [income, setIncome] = useState<string>('')
+  const [residentStatus, setResidentStatus] = useState<'citizen' | 'foreigner'>('citizen')
   const { toggleTheme, getThemeIcon } = useTheme()
   const { language, changeLanguage, t } = useLanguage()
   const { income: urlIncome, setIncome: setUrlIncome } = useURLParam()
@@ -120,6 +122,35 @@ function App() {
                     onChange={(e) => handleIncomeChange(e.target.value)}
                     className="pl-10"
                   />
+                </div>
+              </div>
+
+              {/* Resident Status */}
+              <div className="space-y-2">
+                <Label className="text-sm font-medium">Resident Status</Label>
+                <div className="flex space-x-2">
+                  <Toggle
+                    pressed={residentStatus === 'citizen'}
+                    onPressedChange={() => setResidentStatus('citizen')}
+                    className={`flex-1 border border-solid transition-all duration-100 ${
+                      residentStatus === 'citizen' 
+                        ? 'border-border bg-accent text-accent-foreground opacity-100 scale-100' 
+                        : 'border-border bg-background opacity-70 scale-95'
+                    }`}
+                  >
+                    Singapore Citizen/PR
+                  </Toggle>
+                  <Toggle
+                    pressed={residentStatus === 'foreigner'}
+                    onPressedChange={() => setResidentStatus('foreigner')}
+                    className={`flex-1 border border-solid transition-all duration-100 ${
+                      residentStatus === 'foreigner' 
+                        ? 'border-border bg-accent text-accent-foreground opacity-100 scale-100' 
+                        : 'border-border bg-background opacity-70 scale-95'
+                    }`}
+                  >
+                    Foreigner
+                  </Toggle>
                 </div>
               </div>
 
