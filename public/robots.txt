@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://sgtaxcalculator.com/sitemap.xml
+
+# Important pages
+Allow: /zh-Hans
+Allow: /zh-Hant  
+Allow: /ms
+Allow: /ta
+
+# Block unnecessary files
+Disallow: /*.json$
+Disallow: /vite.svg
+Disallow: /_redirects 

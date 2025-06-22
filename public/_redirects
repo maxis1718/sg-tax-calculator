@@ -1,4 +1,4 @@
-# Static routes (SSG)
+# Static routes (SSG) - 預渲染器生成嵌套資料夾結構
 /           /index.html                200
 /zh-Hans    /zh-Hans/index.html        200
 /zh-Hant    /zh-Hant/index.html        200
