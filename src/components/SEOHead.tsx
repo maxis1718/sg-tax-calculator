@@ -7,10 +7,10 @@ export function SEOHead() {
 
   // 根據是否有收入參數來調整 SEO 內容
   const getOptimizedContent = () => {
-    const baseTitle = t("title");
+    const baseTitle = `${t("title")} 2025`;
     const baseDescription =
-      t("seoDescription") ||
-      "Calculate your Singapore income tax and CPF contributions instantly. Free, accurate, and supports multiple languages.";
+      `${t("seoDescription")} Updated for 2025 tax year.` ||
+      "Calculate your Singapore income tax and CPF contributions instantly for 2025. Free, accurate, and supports multiple languages.";
 
     if (income && income > 0) {
       const formattedIncome = income.toLocaleString("en-SG");
@@ -18,7 +18,7 @@ export function SEOHead() {
         title: `${baseTitle} - $${formattedIncome} ${
           t("seoTitleSuffix") || "Tax Calculator"
         }`,
-        description: `Calculate tax for $${formattedIncome} annual income in Singapore. ${baseDescription}`,
+        description: `Calculate 2025 tax for $${formattedIncome} annual income in Singapore. ${baseDescription}`,
       };
     }
 
@@ -60,7 +60,7 @@ export function SEOHead() {
       <meta name="description" content={description} />
       <meta
         name="keywords"
-        content="Singapore tax calculator, income tax, CPF calculator, tax computation, 新加坡稅務計算器, cukai pendapatan Singapura, சிங்கப்பூர் வரி கணிப்பாளர்"
+        content="Singapore tax calculator 2025, income tax 2025, CPF calculator 2025, tax computation 2025, 新加坡稅務計算器 2025, cukai pendapatan Singapura 2025, சிங்கப்பூர் வரி கணிப்பாளர் 2025"
       />
 
       {/* Open Graph */}
@@ -68,7 +68,7 @@ export function SEOHead() {
       <meta property="og:description" content={description} />
       <meta property="og:type" content="website" />
       <meta property="og:url" content={canonical} />
-      <meta property="og:site_name" content="SG Tax Calculator" />
+      <meta property="og:site_name" content="SG Tax Calculator 2025" />
       <meta property="og:locale" content={currentLang} />
 
       {/* Twitter Card */}

@@ -1,54 +1,62 @@
-# React + TypeScript + Vite
+# Singapore Tax Calculator 2025 🇸🇬
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+✨ **Calculate Now**: [sgtaxcalculator.com](https://sgtaxcalculator.com)
 
-Currently, two official plugins are available:
+A modern income tax calculator designed specifically for Singapore 2025, featuring multi-language support and responsive design.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+![Singapore Tax Calculator](./assets/cover.png)
 
-## Expanding the ESLint configuration
+## 📱 How to Use
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Enter your annual income
+2. Select your resident status
+3. View real-time tax calculation results
+4. Expand to see detailed CPF contribution breakdown
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## ✨ Features
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- 🧮 **Accurate Calculations** - Based on the latest Singapore 2025 tax regulations
+- 💰 **CPF Calculations** - Automatic calculation of CPF contributions (Employee + Employer)
+- 🌍 **Multi-language Support** - English, Chinese, Malay, Tamil
+- 🎨 **Modern UI** - Beautiful interface built with shadcn/ui
+- 📱 **Responsive Design** - Perfect adaptation for all devices
+- 🌙 **Dark Mode** - Light/Dark theme toggle support
+- 🔗 **URL Sync** - Parameters automatically sync to URL for easy sharing
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🎯 Target Users
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+- Singapore Citizens / Permanent Residents (includes CPF calculations)
+- Foreigners (income tax calculations only)
+
+## 📈 Calculation Features
+
+### Income Tax Calculation
+
+- Based on Singapore's latest 2025 tax brackets
+- Automatic average tax rate calculation
+- Support for resident and non-resident tax rates
+
+### CPF Calculation (Citizens/PR only)
+
+- Employee contribution: 20%
+- Employer contribution: 17%
+- Automatic final take-home salary calculation
+
+## 🌐 Multi-language Support
+
+- English
+- Chinese (Simplified/Traditional)
+- Bahasa Malaysia
+- தமிழ் (Tamil)
+
+## 🚀 Tech Stack
+
+- **Frontend Framework**: React 19 + TypeScript
+- **Build Tool**: Vite
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Internationalization**: react-i18next
+- **Icons**: Lucide React
+
+---
+
+Built with ❤️ for Singapore residents
