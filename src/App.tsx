@@ -55,7 +55,7 @@ function App() {
   ]
 
   return (
-    <div className="flex flex-col min-h-screen bg-background">
+    <div className="flex flex-1 flex-col bg-background">
       {/* Sticky Header */}
       <header className="sticky top-0 z-50 backdrop-blur-sm bg-background/95 border-b border-border">
         <div className="container mx-auto px-4 h-14 flex items-center justify-end gap-2">
