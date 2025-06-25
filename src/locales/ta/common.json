@@ -9,6 +9,8 @@
   "estimatedIncomeTax": "மதிப்பிடப்பட்ட வருமான வரி",
   "afterTaxIncome": "வரிக்குப் பிந்தைய வருமானம்",
   "avgTaxRate": "சராசரி வரி விகிதம் (%)",
+  "marginalTaxRate": "விளிம்பு வரி விகிதம் (%)",
+  "monthlyGiro": "மாதாந்திர GIRO",
   "cpfContributions": "CPF பங்களிப்புகள்",
   "employeeCPF": "பணியாளர் CPF (20%)",
   "employerCPF": "முதலாளி CPF (17%)",

@@ -9,6 +9,8 @@
   "estimatedIncomeTax": "Anggaran Cukai Pendapatan",
   "afterTaxIncome": "Pendapatan Selepas Cukai",
   "avgTaxRate": "Kadar Cukai Purata (%)",
+  "marginalTaxRate": "Kadar Cukai Marginal (%)",
+  "monthlyGiro": "GIRO Bulanan",
   "cpfContributions": "Caruman CPF",
   "employeeCPF": "CPF Pekerja (20%)",
   "employerCPF": "CPF Majikan (17%)",

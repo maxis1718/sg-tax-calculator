@@ -159,25 +159,46 @@ function App() {
                 
                 {/* Tax Section */}
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between py-2">
-                    <div className="flex items-center space-x-2">
-                      <Receipt className="h-4 w-4 text-foreground" />
-                      <span className="text-sm font-medium">{t('estimatedIncomeTax')}</span>
-                    </div>
-                    <span className="text-base font-semibold text-rose-700 dark:text-rose-400">
-                      ${summary.tax.netTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
-                    </span>
-                  </div>
+                  <Accordion type="single" collapsible>
+                    <AccordionItem value="tax" className="border-none group">
+                      <AccordionTrigger className="py-2 hover:no-underline [&>svg]:hidden focus-visible:outline-none">
+                        <div className="flex items-center justify-between w-full">
+                          <div className="flex items-center space-x-2">
+                            <Receipt className="h-4 w-4 text-rose-700 dark:text-rose-400" />
+                            <span className="text-sm font-medium text-rose-700 dark:text-rose-400">
+                              {t('estimatedIncomeTax')}
+                            </span>
+                            <ChevronDown className="h-4 w-4 shrink-0 text-rose-700 dark:text-rose-400 transition-transform duration-251 ease-out group-data-[state=open]:rotate-180" />
+                          </div>
+                          <span className="text-base font-semibold text-rose-700 dark:text-rose-400">
+                            ${summary.tax.netTax.toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                          </span>
+                        </div>
+                      </AccordionTrigger>
+                      <AccordionContent className="space-y-2 pt-2 will-change-[height] transition-all duration-162 ease-out">
+                        <div className="flex items-center justify-between py-1.5 pl-6">
+                          <span className="text-sm text-muted-foreground">{t('avgTaxRate')}</span>
+                          <span className="font-medium text-slate-600 dark:text-slate-400">
+                            {summary.tax.averageTaxRate.toFixed(1)}%
+                          </span>
+                        </div>
 
-                  <div className="flex items-center justify-between py-2">
-                    <div className="flex items-center space-x-2">
-                      <Percent className="h-4 w-4 text-foreground" />
-                      <span className="text-sm font-medium">{t('avgTaxRate')}</span>
-                    </div>
-                    <span className="text-base font-semibold">
-                      {summary.tax.averageTaxRate.toFixed(1)}%
-                    </span>
-                  </div>
+                        <div className="flex items-center justify-between py-1.5 pl-6">
+                          <span className="text-sm text-muted-foreground">{t('marginalTaxRate')}</span>
+                          <span className="font-medium text-slate-600 dark:text-slate-400">
+                            {summary.tax.marginalTaxRate.toFixed(1)}%
+                          </span>
+                        </div>
+
+                        <div className="flex items-center justify-between py-1.5 pl-6">
+                          <span className="text-sm text-muted-foreground">{t('monthlyGiro')}</span>
+                          <span className="font-medium text-slate-600 dark:text-slate-400">
+                            ${(summary.tax.netTax / 12).toLocaleString('en-SG', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                          </span>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
                 </div>
 
                 {/* CPF Section */}

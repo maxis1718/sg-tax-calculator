@@ -9,6 +9,8 @@
   "estimatedIncomeTax": "预估所得税",
   "afterTaxIncome": "税后收入",
   "avgTaxRate": "平均税率 (%)",
+  "marginalTaxRate": "边际税率 (%)",
+  "monthlyGiro": "每月 GIRO",
   "cpfContributions": "CPF 公积金",
   "employeeCPF": "员工 CPF (20%)",
   "employerCPF": "雇主 CPF (17%)",

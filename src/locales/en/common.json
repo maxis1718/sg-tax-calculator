@@ -9,6 +9,8 @@
   "estimatedIncomeTax": "Estimated Income Tax",
   "afterTaxIncome": "After-Tax Income",
   "avgTaxRate": "Average Tax Rate (%)",
+  "marginalTaxRate": "Marginal Tax Rate (%)",
+  "monthlyGiro": "Monthly GIRO",
   "cpfContributions": "CPF Contributions",
   "employeeCPF": "Employee CPF (20%)",
   "employerCPF": "Employer CPF (17%)",
